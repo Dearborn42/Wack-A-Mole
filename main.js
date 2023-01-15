@@ -1,6 +1,10 @@
 var c = document.getElementById("game");
 var ctx = c.getContext("2d");
 var rect = c.getBoundingClientRect();
+var highScore = 0;
+var score = 0;
+let game = setInterval(draw, 2000);
+
 
 let layout = Array(2);
 for(let i=0; i < layout.length; i++) {
@@ -39,24 +43,32 @@ class Yoda{
     }
 }
 
-let x;
-let y;
+
+let check = 0;
 function getPos(e){
-    x = Math.ceil((e.clientX - rect.left) / 200)-1;
-    y = Math.ceil((e.clientY - rect.top) / 200)-1;
+    let x = Math.ceil((e.clientX - rect.left) / 200)-1;
+    let y = Math.ceil((e.clientY - rect.top) / 200)-1;
     console.log(x, y);
     if(test.layout[y][x] == "yoda"){
-        console.log("hit");
+        score++;
+        document.getElementById("hits").innerHTML = score + " Hits";
         test.removeYoda();
+    }else{
+        check++;
+        if(check == 2){
+            clearInterval(game);
+            if(score > highScore)
+                highScore = score;
+            document.getElementById("high").innerHTML = "High Score: " + highScore;
+            score = 0;
+            check = 0;
+        }
     }
 }
-
 
 let test = new Yoda();
 test.createGame();
 
-
-setInterval(draw, 2000);
 function draw(){
     test.setRandNum().removeYoda().placeYoda();
 }
