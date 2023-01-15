@@ -5,11 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
-    <title>Document</title>
+    <title>Abuse yoda simulator</title>
 </head>
 <body>
     <canvas id="game" width="600px" height="400px" onmousemove="getPos(event)"></canvas>
-    <button onclick="game">Start game</button>
+    <button onclick="setInterval(mode1, time); mode=true">Start gamemode 1</button>
+    <button onclick="setInterval(mode2, 1); mode=false">Start gamemode 2</button>
     <p id="hits">0 hits</p>
     <p id="high"></p>
     <script src="main.js"></script>
