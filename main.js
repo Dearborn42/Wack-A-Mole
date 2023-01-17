@@ -38,12 +38,13 @@ class Yoda{
         score++;
         document.getElementById("hits").innerHTML = score + " Hits";
         this.removeYoda();
+        create();
         hits += .25; 
     }
     endGame(){
         check = 0;
         timer = 0;
-        hits = 0;
+        hits = 1;
         for(let i = 1; i < 99999; i++)
             window.clearInterval(i);
         if(score > highScore)
@@ -107,14 +108,15 @@ function mode2(){
     ctx.stroke();
     hor += movementX;
     ver += movementY;
-    if(hor > 579)
+    if(hor >= 579)
         movementX = -1*hits;
-    if(hor < 1)
+    if(hor <= 1)
         movementX = 1*hits;
-    if(ver > 379)
+    if(ver >= 379)
         movementY = -1*hits;
-    if(ver < 1)
+    if(ver <= 1)
         movementY = 1*hits;
     if(timer == 600)
-        test.endGame();   
+        test.endGame();  
+    console.log(hor, ver, movementX, movementY); 
 }
