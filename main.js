@@ -59,7 +59,7 @@ class Yoda{
 // if hit you get more score
 // if miss twice then game ends
 var hits = 1;
-var time = 2000/hits;
+// var time = 2000/hits;
 function getPos(e){
     if(mode == true){
         let x = Math.ceil((e.clientX - rect.left)/200)-1;
@@ -118,5 +118,4 @@ function mode2(){
         movementY = 1*hits;
     if(timer == 600)
         test.endGame();  
-    console.log(hor, ver, movementX, movementY); 
 }
