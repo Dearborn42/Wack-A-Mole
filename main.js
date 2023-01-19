@@ -2,10 +2,8 @@
 // placeYoda(puts a green square in one of 6 spots on the canvas)
 // removeYoda(removes a green square from the canvas)
 // endGame(clears all intervals and resets all game variables)
+var mode = null; var timer = 0; var check = 0; var highScore = 0; var score = 0; var hits = 1;
 class Yoda{
-    constructor(){
-        this.highScore = 0; this.score = 0; this.timer = 0; this.check = 0; this.mode = null; this.hits = 1;
-    }
     removeButtons(){
         document.getElementById("m1").hidden = true;
         document.getElementById("m2").hidden = true;
@@ -27,35 +25,35 @@ class Yoda{
         return this;
     }
     yodaMissed(){
-        this.check++;
+        check++;
         console.log("yodaMissed");
-        if(this.check == 2)
+        if(check == 2)
             this.endGame();
     }
     yodaHit(){
-        this.timer = 0;
-        this.check = 0;
-        this.score++;
-        document.getElementById("hits").innerHTML = this.score + " Hits";
+        timer = 0;
+        check = 0;
+        score++;
+        document.getElementById("hits").innerHTML = score + " Hits";
         this.removeYoda();
         create();
-        this.hits += .1; 
+        hits += .1; 
     }
     endGame(){
         for(let i=0; i<99999; i++)
             window.clearTimeout(i);
         document.getElementById("m1").hidden = false;
         document.getElementById("m2").hidden = false;
-        this.check = 0; 
-        this.timer = 0; 
-        this.hits = 1; 
-        this.mode = null; 
+        check = 0; 
+        timer = 0; 
+        hits = 1; 
+        mode = null; 
         this.active = false;
-        if(this.score > this.highScore)
-            this.highScore = this.score;
-        document.getElementById("high").innerHTML = "High Score: " + this.highScore;
+        if(score > highScore)
+            highScore = score;
+        document.getElementById("high").innerHTML = "High Score: " + highScore;
         document.getElementById("hits").innerHTML = "0 Hits";
-        this.score = 0;
+        score = 0;
         this.removeYoda();
     }
 }
@@ -70,7 +68,7 @@ var rect = c.getBoundingClientRect();
 // if miss twice then game ends
 // var time = 2000/hits;
 function getPos(e){
-    if(test.mode == true){
+    if(mode == true){
         let x = Math.ceil((e.clientX - rect.left)/200)-1;
         let y = Math.ceil((e.clientY - rect.top)/200)-1;
         if(x == test.x && y == test.y)
@@ -78,7 +76,7 @@ function getPos(e){
         else
             test.yodaMissed();
     }
-    if(test.mode == false){
+    if(mode == false){
         let x = Math.floor((e.clientX - rect.left)/hor);
         let y = Math.floor((e.clientY - rect.top)/ver);
         let sy = ver/ver;
@@ -94,8 +92,8 @@ function mode1(){
     test.removeButtons();
     test.active = true;
     test.removeYoda().placeYoda();
-    test.timer++;
-    if(test.timer == 3)
+    timer++;
+    if(timer == 3)
         test.endGame();
     if(test.active == true)
         setTimeout(mode1, 2000/hits);
@@ -112,7 +110,7 @@ let movementX = 1; let movementY = 1;
 function mode2(){
     test.removeButtons();
     test.active = true; 
-    test.timer++;
+    timer++;
     test.removeYoda();
     ctx.beginPath();
     ctx.fillStyle = "green";
@@ -121,7 +119,7 @@ function mode2(){
     hor += movementX; ver += movementY;
     if (hor >= 579 || hor <= 1) movementX = (hor <= 1 ? 1 : -1) * hits;
     if (ver >= 379 || ver <= 1) movementY = (ver <= 1 ? 1 : -1) * hits;
-    if(test.timer == 600)
+    if(timer == 600)
         test.endGame(); 
     if(test.active == true)
         setTimeout(mode2, 1); 
