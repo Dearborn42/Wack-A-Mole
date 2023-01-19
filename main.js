@@ -1,16 +1,15 @@
-var c = document.getElementById("game");
-var ctx = c.getContext("2d");
-var rect = c.getBoundingClientRect();
-var mode;
-var highScore = 0;
-var score = 0;
-var timer = 0;
-var check = 0;
 // class with game functions 
 // placeYoda(puts a green square in one of 6 spots on the canvas)
 // removeYoda(removes a green square from the canvas)
 // endGame(clears all intervals and resets all game variables)
 class Yoda{
+    constructor(){
+        this.highScore = 0; this.score = 0; this.timer = 0; this.check = 0; this.mode = null; this.hits = 1;
+    }
+    removeButtons(){
+        document.getElementById("m1").hidden = true;
+        document.getElementById("m2").hidden = true;
+    }
     placeYoda(){
         this.x = Math.floor(Math.random()*3);
         this.y = Math.floor(Math.random()*2);
@@ -28,94 +27,102 @@ class Yoda{
         return this;
     }
     yodaMissed(){
-        check++;
-        if(check == 2)
+        this.check++;
+        console.log("yodaMissed");
+        if(this.check == 2)
             this.endGame();
     }
     yodaHit(){
-        timer = 0;
-        check = 0;
-        score++;
-        document.getElementById("hits").innerHTML = score + " Hits";
+        this.timer = 0;
+        this.check = 0;
+        this.score++;
+        document.getElementById("hits").innerHTML = this.score + " Hits";
         this.removeYoda();
         create();
-        hits += .25; 
+        this.hits += .1; 
     }
     endGame(){
-        check = 0;
-        timer = 0;
-        hits = 1;
-        for(let i = 1; i < 99999; i++)
-            window.clearInterval(i);
-        if(score > highScore)
-            highScore = score;
-        document.getElementById("high").innerHTML = "High Score: " + highScore;
+        for(let i=0; i<99999; i++)
+            window.clearTimeout(i);
+        document.getElementById("m1").hidden = false;
+        document.getElementById("m2").hidden = false;
+        this.check = 0; 
+        this.timer = 0; 
+        this.hits = 1; 
+        this.mode = null; 
+        this.active = false;
+        if(this.score > this.highScore)
+            this.highScore = this.score;
+        document.getElementById("high").innerHTML = "High Score: " + this.highScore;
         document.getElementById("hits").innerHTML = "0 Hits";
-        score = 0;
+        this.score = 0;
         this.removeYoda();
     }
 }
+
+
+let test = new Yoda();
+var c = document.getElementById("game");
+var ctx = c.getContext("2d");
+var rect = c.getBoundingClientRect();
 // gets x and y coordinates of mouse and uses them to dectect if you have hit or missed the square
 // if hit you get more score
 // if miss twice then game ends
-var hits = 1;
 // var time = 2000/hits;
 function getPos(e){
-    if(mode == true){
+    if(test.mode == true){
         let x = Math.ceil((e.clientX - rect.left)/200)-1;
         let y = Math.ceil((e.clientY - rect.top)/200)-1;
         if(x == test.x && y == test.y)
             test.yodaHit();
-        if(x != test.x && y != test.y)
+        else
             test.yodaMissed();
     }
-    if(mode == false){
+    if(test.mode == false){
         let x = Math.floor((e.clientX - rect.left)/hor);
         let y = Math.floor((e.clientY - rect.top)/ver);
         let sy = ver/ver;
         let sx = hor/hor;
         if(x == sx && y == sy)
             test.yodaHit();
-        if(x!= sx && y!= sy)
+        else
             test.yodaMissed();
     }
 }
-let test = new Yoda();
 // mode 1 is basic wack-a-mole
 function mode1(){
+    test.removeButtons();
+    test.active = true;
     test.removeYoda().placeYoda();
-    timer++;
-    if(timer == 3)
+    test.timer++;
+    if(test.timer == 3)
         test.endGame();
+    if(test.active == true)
+        setTimeout(mode1, 2000/hits);
 }
 // creates random starting position
-let hor;
-let ver;
+let hor; let ver;
 function create(){
     hor = Math.floor(Math.random()*500);
     ver = Math.floor(Math.random()*300);
 }
 create();
 // moves square and bounces it off the border if it runs into it
-let movementX = 1*hits;
-let movementY = 1*hits;
+let movementX = 1; let movementY = 1;
 function mode2(){
-    timer++;
+    test.removeButtons();
+    test.active = true; 
+    test.timer++;
     test.removeYoda();
     ctx.beginPath();
     ctx.fillStyle = "green";
     ctx.fillRect(hor, ver, 50, 50);
     ctx.stroke();
-    hor += movementX;
-    ver += movementY;
-    if(hor >= 579)
-        movementX = -1*hits;
-    if(hor <= 1)
-        movementX = 1*hits;
-    if(ver >= 379)
-        movementY = -1*hits;
-    if(ver <= 1)
-        movementY = 1*hits;
-    if(timer == 600)
-        test.endGame();  
+    hor += movementX; ver += movementY;
+    if (hor >= 579 || hor <= 1) movementX = (hor <= 1 ? 1 : -1) * hits;
+    if (ver >= 379 || ver <= 1) movementY = (ver <= 1 ? 1 : -1) * hits;
+    if(test.timer == 600)
+        test.endGame(); 
+    if(test.active == true)
+        setTimeout(mode2, 1); 
 }

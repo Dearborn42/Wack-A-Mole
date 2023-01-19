@@ -8,9 +8,9 @@
     <title>Abuse yoda simulator</title>
 </head>
 <body>
-    <canvas id="game" width="600px" height="400px" onmousemove="getPos(event)"></canvas>
-    <button onclick="setInterval(mode1, 2000); mode=true">Start gamemode 1</button>
-    <button onclick="setInterval(mode2, 1); mode=false">Start gamemode 2</button>
+    <canvas id="game" width="600px" height="400px" onclick="getPos(event)"></canvas>
+    <button id="m1" onclick="mode1(); mode=true">Start gamemode 1</button>
+    <button id="m2" onclick="mode2(); mode=false">Start gamemode 2</button>
     <p id="hits">0 hits</p>
     <p id="high"></p>
     <script src="main.js"></script>
