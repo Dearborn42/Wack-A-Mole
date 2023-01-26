@@ -1,3 +1,4 @@
-#game{
-    border: 2px solid black;
+div{
+    width: 62vw;
+    background-image: url("background.png");
 }
