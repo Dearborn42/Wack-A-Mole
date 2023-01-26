@@ -2,6 +2,11 @@
 // placeYoda(puts a green square in one of 6 spots on the canvas)
 // removeYoda(removes a green square from the canvas)
 // endGame(clears all intervals and resets all game variables)
+
+
+
+
+
 var mode = null; var timer = 0; var check = 0; var highScore = 0; var score = 0; var hits = 1;
 class Yoda{
     removeButtons(){
@@ -11,15 +16,17 @@ class Yoda{
     placeYoda(){
         this.x = Math.floor(Math.random()*3);
         this.y = Math.floor(Math.random()*2);
+        this.yoda = new Image();
+        this.yoda.src = "yoda1.png";
         ctx.beginPath();
-        ctx.fillStyle = "green";
-        ctx.fillRect(this.x*200, this.y*200, 200, 200);
+        ctx.drawImage(this.yoda, this.x*200, this.y*200, 200, 200);
         ctx.stroke();
+        console.log(this.x, this.y);
         return this;
     }
     removeYoda(){
         ctx.beginPath();
-        ctx.fillStyle = "white";
+        this.yoda.src = "yoda2.png";
         ctx.fillRect(0, 0, 600, 400);
         ctx.stroke();
         return this;
@@ -63,6 +70,9 @@ let test = new Yoda();
 var c = document.getElementById("game");
 var ctx = c.getContext("2d");
 var rect = c.getBoundingClientRect();
+
+
+// Make sure the image is loaded first otherwise nothing will draw.
 // gets x and y coordinates of mouse and uses them to dectect if you have hit or missed the square
 // if hit you get more score
 // if miss twice then game ends
