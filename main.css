@@ -1,4 +1,25 @@
-div{
-    width: 62vw;
+#game{
+    width: 80vw;
+    height: 55vw;
     background-image: url("background.png");
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
 }
+
+#top{
+    margin-top: 150px;
+}
+.row{
+    padding-top: 175px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.hole{
+    width: 300px;
+    height: 100px;
+    background: url("sand1.png");
+}
+
+

@@ -9,12 +9,22 @@
 </head>
 <body>
     <div>
-    <canvas id="game" width="600px" height="400px" onclick="getPos(event)"></canvas>
+    <div id="game">
+        <div class="row" id="top">
+            <div class="hole" id="hole00" onclick="getPos('00')"></div>
+            <div class="hole" id="hole01" onclick="getPos('01')"></div>
+            <div class="hole" id="hole02" onclick="getPos('02')"></div>
+        </div>
+        <div class="row">
+            <div class="hole" id="hole10" onclick="getPos('10')"></div>
+            <div class="hole" id="hole11" onclick="getPos('11')"></div>
+            <div class="hole" id="hole12" onclick="getPos('12')"></div>
+        </div>
+    </div>
     <button id="m1" onclick="mode1(); mode=true">Start gamemode 1</button>
     <button id="m2" onclick="mode2(); mode=false">Start gamemode 2</button>
     <p id="hits">0 hits</p>
     <p id="high"></p>
-    </div>
     <script src="main.js"></script>
 </body>
 </html>

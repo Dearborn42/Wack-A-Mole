@@ -16,19 +16,16 @@ class Yoda{
     placeYoda(){
         this.x = Math.floor(Math.random()*3);
         this.y = Math.floor(Math.random()*2);
-        this.yoda = new Image();
-        this.yoda.src = "yoda1.png";
-        ctx.beginPath();
-        ctx.drawImage(this.yoda, this.x*200, this.y*200, 200, 200);
-        ctx.stroke();
-        console.log(this.x, this.y);
+        document.getElementById(`hole${this.y}${this.x}`).style.backgroundImage = "url('yoda1.png')";
         return this;
     }
     removeYoda(){
-        ctx.beginPath();
-        this.yoda.src = "yoda2.png";
-        ctx.fillRect(0, 0, 600, 400);
-        ctx.stroke();
+        for(let i=0; i<2; i++){
+            for(let j=0; j<3; j++){
+              document.getElementById(`hole${i}${j}`).style.backgroundImage = "url('sand1.png')";
+  
+            }
+        }
         return this;
     }
     yodaMissed(){
@@ -42,7 +39,7 @@ class Yoda{
         check = 0;
         score++;
         document.getElementById("hits").innerHTML = score + " Hits";
-        this.removeYoda();
+        // this.removeYoda();
         create();
         hits += .1; 
     }
@@ -67,9 +64,6 @@ class Yoda{
 
 
 let test = new Yoda();
-var c = document.getElementById("game");
-var ctx = c.getContext("2d");
-var rect = c.getBoundingClientRect();
 
 
 // Make sure the image is loaded first otherwise nothing will draw.
@@ -77,26 +71,27 @@ var rect = c.getBoundingClientRect();
 // if hit you get more score
 // if miss twice then game ends
 // var time = 2000/hits;
-function getPos(e){
-    if(mode == true){
-        let x = Math.ceil((e.clientX - rect.left)/200)-1;
-        let y = Math.ceil((e.clientY - rect.top)/200)-1;
-        if(x == test.x && y == test.y)
-            test.yodaHit();
-        else
-            test.yodaMissed();
-    }
-    if(mode == false){
-        let x = Math.floor((e.clientX - rect.left)/hor);
-        let y = Math.floor((e.clientY - rect.top)/ver);
-        let sy = ver/ver;
-        let sx = hor/hor;
-        if(x == sx && y == sy)
-            test.yodaHit();
-        else
-            test.yodaMissed();
-    }
-}
+
+            function getPos(pos){
+                pos.split("");
+                let x = parseInt(pos[1], 10);
+                let y = parseInt(pos[0], 10);
+                if(mode == true){
+                    if(x == test.x && y == test.y)
+                        test.yodaHit();
+                    else
+                        test.yodaMissed();
+                }
+                if(mode == false){
+                    let sy = ver/ver;
+                    let sx = hor/hor;
+                    if(x == sx && y == sy)
+                        test.yodaHit();
+                    else
+                        test.yodaMissed();
+                }
+            }
+
 // mode 1 is basic wack-a-mole
 function mode1(){
     test.removeButtons();
