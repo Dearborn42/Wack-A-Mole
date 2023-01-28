@@ -1,42 +1,48 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
-    <title>Abuse yoda simulator</title>
+    <title>Wack-o-Mole</title>
 </head>
+
 <body>
-    <div>
-    <div id="game">
-        <div class="row" id="top">
-            <div id="yoda00" onclick="getPos('00')">
-                <div class="hole" id="hole00"></div>
-            </div>
-            <div id="yoda01"onclick="getPos('01')">
-                <div class="hole" id="hole01"></div>
-            </div>
-            <div id="yoda02" onclick="getPos('02')">
-                <div class="hole" id="hole02"></div>
-            </div>
+
+    <div class="container">
+        <div class="hole" id="hole00" onclick="hit('0')">
+            <div class="mole"></div>
         </div>
-        <div class="row">
-            <div id="yoda10"  onclick="getPos('10')">
-                    <div class="hole" id="hole10"></div>
-            </div>
-            <div id="yoda11" onclick="getPos('11')">
-                <div class="hole" id="hole11"></div>
-            </div>
-            <div id="yoda12" onclick="getPos('12')">
-                <div class="hole" id="hole12"></div>
-            </div>
+        <div class="hole" id="hole01" onclick="hit('1')">
+            <div class="mole"></div>
+        </div>
+        <div class="hole" id="hole02" onclick="hit('2')">
+            <div class="mole"></div>
+        </div>
+        <div class="hole" id="hole10" onclick="hit('3')">
+            <div class="mole"></div>
+        </div>
+        <div class="hole" id="hole11" onclick="hit('4')">
+            <div class="mole"></div>
+        </div>
+        <div class="hole" id="hole12" onclick="hit('5')">
+            <div class="mole"></div>
         </div>
     </div>
-    <button id="m1" onclick="mode1(); mode=true">Start gamemode 1</button>
-    <button id="m2" onclick="mode2(); mode=false">Start gamemode 2</button>
-    <p id="hits">0 hits</p>
-    <p id="high"></p>
-    <script src="main.js"></script>
+
+    <div class="controls">
+        <!-- <button id="m1" onclick="mode1(); mode=true">Start gamemode 1</button>
+        <button id="m2" onclick="mode2(); mode=false">Start gamemode 2</button> -->
+        <button onclick="test()">Gamemode 1</button>
+        <p id="high"></p>
+    </div>
+
+    <h1 id="score">Score: 0</p>
+
+        <script src="main.js"></script>
 </body>
+
 </html>
