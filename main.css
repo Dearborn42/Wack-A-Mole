@@ -84,6 +84,8 @@ h1 {
     top: 100%;
 }
 
-/* #hole00, #hole01, #hole02, #hole10, #hole11, #hole12{
+.hole.explode .mole {
+    background: url(fire.png) bottom center no-repeat;
+    background-size: 60%;
     top: 0;
-} */
+}

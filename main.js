@@ -9,63 +9,56 @@ const holeElements = document.querySelectorAll('.hole');
 
 class Yoda{
     constructor(){
-        this.hole;
-        this.index;
-        this.active;
+        this.hole; this.index; this.active;
     }
-    yodaAppear(){
+    yodaAppear() {
         this.index = Math.floor(Math.random() * holeElements.length);
         this.hole = holeElements[this.index];
-        this.hole.classList.remove('down');
-        this.hole.classList.add('up');
+        this.hole.classList.toggle('down', false);
+        this.hole.classList.toggle('up', true);
         return this;
     }
-    yodaDisappear(){
-        for(let i=0; i<holeElements.length; i++){
-            this.hole = holeElements[i];
-            this.hole.classList.remove('up');
-            this.hole.classList.add('down');
-        }
+
+    yodaDisappear() {
+        holeElements.forEach(hole => {hole.classList.toggle('up', false);hole.classList.toggle('down', true);});
         return this;
     }
+
     yodaHit(){
         this.yodaDisappear();
         this.index = 111;
-        timer = 0;check = 0;score++;
-        document.getElementById('score').innerHTML = "Score: " + score;
+        timer = 0; check = 0; score++;
+        document.getElementById('score').innerHTML = `Score: ${score}`;
     }
     yodaMissed(){
         check++;
         if(check == 2)
             this.endGame();
     }
-    removeButton(){
-        document.getElementById('m1').hidden = true;
-        document.getElementById('m2').hidden = true;
+    removeButton(set){
+        document.getElementById('m1').hidden = set;
+        document.getElementById('m2').hidden = set;
     }
-    endGame(){
-        for(let i=0; i<99999; i++)window.clearTimeout(i);
+    endGame() {
+        for (let i = 0; i < 99999; i++) window.clearTimeout(i);
         this.active = false;
-        mode = null;timer = 0;check = 0;
-        if(score > highScore)highScore = score;
+        mode = null; timer = 0; check = 0;
+        highScore = Math.max(score, highScore);
         score = 0;
         this.yodaDisappear();
         document.getElementById('score').innerHTML = "Score: 0";
-        document.getElementById('highScore').innerHTML = "Highscore: " + highScore;
-        document.getElementById('m1').hidden = false;
-        document.getElementById('m2').hidden = false;
+        document.getElementById('highScore').innerHTML = `Highscore: ${highScore}`;
+        this.removeButton(false);
+        holeElements.forEach(hole => {hole.classList.toggle('explode', false);});
     }
 }
 
 
 let yodaGame = new Yoda();
 
-function hit(mound){
-    if(mode==true)parseInt(mound, 10) === yodaGame.index ? yodaGame.yodaHit() : yodaGame.yodaMissed();
-}
 function test(){
-    if(mode == true){
-        yodaGame.removeButton();
+    if(mode){
+        yodaGame.removeButton(true);
         yodaGame.active = true;
         yodaGame.yodaDisappear().yodaAppear();
         timer++;
@@ -74,19 +67,25 @@ function test(){
     }
 }
 
-
-
-
-let yodaGame2 = new Yoda();
-
-var pos;
-function getPos(num){
-    if(mode == false)pos = parseInt(num, 10);
-    let index = Math.floor(Math.random() * holeElements.length);
-    if(index != pos){
-        score++;
-        document.getElementById('score').innerHTML = "Score: " + score;
-    }else{
-        yodaGame2.endGame();
+let pos;
+let index;
+function hit(mound){
+    if(mode==true)parseInt(mound, 10) === yodaGame.index ? yodaGame.yodaHit() : yodaGame.yodaMissed();
+    if(mode==false){
+        pos = parseInt(mound, 10);
+        holeElements[pos].classList.toggle('down', false);
+        holeElements[pos].classList.toggle('up', true);
+        index = Math.floor(Math.random() * holeElements.length);
+        holeElements[index].classList.toggle('explode', true);
+        setTimeout(round, 3000);
     }
+}
+
+function round() {
+    if (index !== pos) {
+        score++;
+        document.getElementById('score').innerHTML = `Score: ${score}`;
+        holeElements[pos].classList.toggle('up', false);
+        holeElements[index].classList.toggle('explode', false);
+    } else yodaGame.endGame();
 }
