@@ -7,7 +7,7 @@
 
 
 
-var mode = null; var timer = 0; var check = 0; var highScore = 0; var score = 0; var hits = 1;
+var mode = null; var timer = 0; var check = 0; var highScore = 0; var score = 0; var hits = 1; var speed = `${2/hits}`
 class Yoda{
     removeButtons(){
         document.getElementById("m1").hidden = true;
@@ -16,14 +16,16 @@ class Yoda{
     placeYoda(){
         this.x = Math.floor(Math.random()*3);
         this.y = Math.floor(Math.random()*2);
-        document.getElementById(`hole${this.y}${this.x}`).style.backgroundImage = "url('yoda1.png')";
+        var speed = 2/hits;
+        document.getElementById(`yoda${this.y}${this.x}`).style.backgroundImage = "url('yoda1.png')";
+        document.getElementById(`yoda${this.y}${this.x}`).style.transition = `all` + speed + "s";
+        document.getElementById(`yoda${this.y}${this.x}`).style.top = 0;
         return this;
     }
     removeYoda(){
         for(let i=0; i<2; i++){
             for(let j=0; j<3; j++){
-              document.getElementById(`hole${i}${j}`).style.backgroundImage = "url('sand1.png')";
-  
+                document.getElementById(`yoda${i}${j}`).style.top = "100%";
             }
         }
         return this;
@@ -39,7 +41,8 @@ class Yoda{
         check = 0;
         score++;
         document.getElementById("hits").innerHTML = score + " Hits";
-        // this.removeYoda();
+        document.getElementById(`yoda${this.y}${this.x}`).style.backgroundImage = "url('yoda2.png')";
+        this.removeYoda();
         create();
         hits += .1; 
     }

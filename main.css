@@ -8,7 +8,7 @@
 }
 
 #top{
-    margin-top: 150px;
+    margin-top: 250px;
 }
 .row{
     padding-top: 175px;
@@ -16,10 +16,23 @@
     justify-content: space-evenly;
 }
 
-.hole{
-    width: 300px;
-    height: 100px;
+.hole {
+    overflow: hidden;
+    width: 133px;
+    height: 48px;
+    position: relative;
     background: url("sand1.png");
+    background-size: contain;
 }
 
-
+#yoda00,
+#yoda01,
+#yoda02,
+#yoda10,
+#yoda11,
+#yoda12 {
+    background: url(yoda1.png);
+    background-size: contain;
+    position: relative;
+    top: 100%;
+}

@@ -11,14 +11,26 @@
     <div>
     <div id="game">
         <div class="row" id="top">
-            <div class="hole" id="hole00" onclick="getPos('00')"></div>
-            <div class="hole" id="hole01" onclick="getPos('01')"></div>
-            <div class="hole" id="hole02" onclick="getPos('02')"></div>
+            <div id="yoda00" onclick="getPos('00')">
+                <div class="hole" id="hole00"></div>
+            </div>
+            <div id="yoda01"onclick="getPos('01')">
+                <div class="hole" id="hole01"></div>
+            </div>
+            <div id="yoda02" onclick="getPos('02')">
+                <div class="hole" id="hole02"></div>
+            </div>
         </div>
         <div class="row">
-            <div class="hole" id="hole10" onclick="getPos('10')"></div>
-            <div class="hole" id="hole11" onclick="getPos('11')"></div>
-            <div class="hole" id="hole12" onclick="getPos('12')"></div>
+            <div id="yoda10"  onclick="getPos('10')">
+                    <div class="hole" id="hole10"></div>
+            </div>
+            <div id="yoda11" onclick="getPos('11')">
+                <div class="hole" id="hole11"></div>
+            </div>
+            <div id="yoda12" onclick="getPos('12')">
+                <div class="hole" id="hole12"></div>
+            </div>
         </div>
     </div>
     <button id="m1" onclick="mode1(); mode=true">Start gamemode 1</button>
