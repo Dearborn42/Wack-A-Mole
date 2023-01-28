@@ -13,22 +13,22 @@
 <body>
 
     <div class="container">
-        <div class="hole" id="hole00" onclick="hit('0')">
+        <div class="hole" id="hole00" onclick="hit('0');getPos('0');">
             <div class="mole"></div>
         </div>
-        <div class="hole" id="hole01" onclick="hit('1')">
+        <div class="hole" id="hole01" onclick="hit('1'); getPos('1');">
             <div class="mole"></div>
         </div>
-        <div class="hole" id="hole02" onclick="hit('2')">
+        <div class="hole" id="hole02" onclick="hit('2'); getPos('2');">
             <div class="mole"></div>
         </div>
-        <div class="hole" id="hole10" onclick="hit('3')">
+        <div class="hole" id="hole10" onclick="hit('3'); getPos('3');">
             <div class="mole"></div>
         </div>
-        <div class="hole" id="hole11" onclick="hit('4')">
+        <div class="hole" id="hole11" onclick="hit('4'); getPos('4');">
             <div class="mole"></div>
         </div>
-        <div class="hole" id="hole12" onclick="hit('5')">
+        <div class="hole" id="hole12" onclick="hit('5'); getPos('5');">
             <div class="mole"></div>
         </div>
     </div>
@@ -36,11 +36,13 @@
     <div class="controls">
         <!-- <button id="m1" onclick="mode1(); mode=true">Start gamemode 1</button>
         <button id="m2" onclick="mode2(); mode=false">Start gamemode 2</button> -->
-        <button onclick="test()">Gamemode 1</button>
+        <button id="m1" onclick="mode=true;test();">Gamemode 1</button>
+        <button id="m2" onclick="mode=false;">Gamemode 2</button>
         <p id="high"></p>
     </div>
 
-    <h1 id="score">Score: 0</p>
+    <h1 id="score">Score: 0</h1>
+    <h2 id="highScore"></h2>
 
         <script src="main.js"></script>
 </body>

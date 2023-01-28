@@ -30,6 +30,12 @@ h1 {
     line-height: 1;
     border-radius: 1rem;
 }
+#highScore {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0 3rem;
+    line-height: 1;
+    border-radius: 1rem;
+}
 
 .container {
     padding-top: 40vh;
@@ -65,11 +71,17 @@ h1 {
     top: 100%;
     width: 100%;
     height: 100%;
-    transition: all 0.4s;
+    transition: all 2s;
 }
 
 .hole.up .mole {
     top: 0;
+}
+
+.hole.down .mole {
+    background: url(yoda2.png) bottom center no-repeat;
+    background-size: 60%;
+    top: 100%;
 }
 
 /* #hole00, #hole01, #hole02, #hole10, #hole11, #hole12{
