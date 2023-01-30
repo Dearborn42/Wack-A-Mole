@@ -9,7 +9,7 @@ const holeElements = document.querySelectorAll('.hole');
 
 class Yoda{
     constructor(){
-        this.hole; this.index; this.active;
+        this.hole; this.index;
     }
     yodaAppear() {
         this.index = Math.floor(Math.random() * holeElements.length);
@@ -38,10 +38,10 @@ class Yoda{
     removeButton(set){
         document.getElementById('m1').hidden = set;
         document.getElementById('m2').hidden = set;
+        holeElements.forEach(hole => {hole.hidden = false;});
     }
     endGame() {
         for (let i = 0; i < 99999; i++) window.clearTimeout(i);
-        this.active = false;
         mode = null; timer = 0; check = 0;
         highScore = Math.max(score, highScore);
         score = 0;
@@ -49,7 +49,7 @@ class Yoda{
         document.getElementById('score').innerHTML = "Score: 0";
         document.getElementById('highScore').innerHTML = `Highscore: ${highScore}`;
         this.removeButton(false);
-        holeElements.forEach(hole => {hole.classList.toggle('explode', false);});
+        holeElements.forEach(hole => {hole.classList.toggle('explode', false);hole.hidden = true;});
     }
 }
 
@@ -58,12 +58,11 @@ let yodaGame = new Yoda();
 
 function test(){
     if(mode){
+        setTimeout(test, 3000);
         yodaGame.removeButton(true);
-        yodaGame.active = true;
         yodaGame.yodaDisappear().yodaAppear();
         timer++;
         if(timer == 3)yodaGame.endGame();
-        if(yodaGame.active)setTimeout(test, 2000);
     }
 }
 
@@ -72,12 +71,12 @@ let index;
 function hit(mound){
     if(mode==true)parseInt(mound, 10) === yodaGame.index ? yodaGame.yodaHit() : yodaGame.yodaMissed();
     if(mode==false){
+        setTimeout(round, 3000);
         pos = parseInt(mound, 10);
         holeElements[pos].classList.toggle('down', false);
         holeElements[pos].classList.toggle('up', true);
         index = Math.floor(Math.random() * holeElements.length);
         holeElements[index].classList.toggle('explode', true);
-        setTimeout(round, 3000);
     }
 }
 
