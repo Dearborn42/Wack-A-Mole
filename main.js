@@ -1,9 +1,7 @@
 // class with game functions 
 // placeYoda(puts a green square in one of 6 spots on the canvas)
 // removeYoda(removes a green square from the canvas)
-// endGame(clears all intervals and resets all game variables)
-
-
+// endGame(clears all intervals and resets all game variables)  
 var mode = null; var timer = 0; var check = 0; var highScore = 0; var score = 0;
 const holeElements = document.querySelectorAll('.hole');
 
